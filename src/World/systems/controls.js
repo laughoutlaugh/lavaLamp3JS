@@ -1,4 +1,4 @@
-import { OrbitControls } from 'three';
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import { Vector3 } from 'three';
 
 function createControls( camera, canvas ){

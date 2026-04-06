@@ -7,7 +7,7 @@ const setSize = ( container, camera, renderer ) => {
 };
 
 class Resizer {
-    contructor( container, camera, renderer ) {
+    constructor( container, camera, renderer ) {
         // set initial size on load
         setSize( container, camera, renderer );
 
