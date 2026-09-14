@@ -8,7 +8,8 @@ import { Loop } from './systems/Loop.js';
 import { createCamera } from "./components/camera";
 import { createScene } from "./components/scene";
 import { createGridHelper } from "./components/helpers";
-import { Lamp } from './components/Lamp/Lamp';
+import { loadLamp } from './components/Lamp/lamp';
+import { cAmbLight } from './components/lights';
 
 // module scoped parameters
 let camera, renderer, scene, controls, loop;
@@ -25,14 +26,15 @@ class World {
 
         // --- Entities ---
         const { grid, axes } = createGridHelper();
-        const lamp = new Lamp();
+        const ambLight = cAmbLight( '#ebaf8d' );
 
         // --- OrbitControls ---
         controls = createControls( camera, renderer.domElement );
 
         // --- Set Scene ---
-        scene.add( grid,
-                   axes,
+        scene.add(  grid,
+                    axes,
+                    ambLight
             );
 
         // --- Window Resizing ---
@@ -40,7 +42,9 @@ class World {
     }
 
     async init() {
+        const lamp = await loadLamp();
 
+        scene.add( lamp );
     }
 
     // --- Scene Rendering ---
