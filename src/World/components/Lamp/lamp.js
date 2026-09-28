@@ -5,14 +5,14 @@ async function loadLamp() {
     const loader = new GLTFLoader();
 
     const lampData = await loader.loadAsync(
-        '../../../../models/lavaLamp.glb'
+        '/models/lavaLamp.glb'
     );
 
     console.log( 'loaded ^^', lampData );
 
     const lamp = setupLamp( lampData );
     lamp.scale.setScalar( 4 );
-    lamp.position.set( 0, 1, 0 );
+    lamp.position.set( 0, 0.7, 0 );
 
     return lamp;
 }

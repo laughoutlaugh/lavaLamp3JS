@@ -1,5 +1,3 @@
-import { MeshPhongMaterial } from 'three';
+import { MeshPhysicalMaterial } from 'three';
 
-function shinyMat() {
-
-}
+function
