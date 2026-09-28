@@ -1,20 +1,23 @@
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader';
 import { setupLamp } from './setupLamp'
 
-async function loadLamp() {
+function loadLamp( onLoaded ) {
     const loader = new GLTFLoader();
 
-    const lampData = await loader.loadAsync(
-        '/models/lavaLamp.glb'
+    loader.load(
+        '/models/lavaLamp.glb',
+        ( lampData ) => {
+            console.log( 'loaded^^', lampData );
+
+            const lamp =  setupLamp( lampData );
+
+            onLoaded( lamp );
+        },
+        undefined,
+        ( error ) => {
+            console.error( 'Failed to load lamp :( ', error );
+        }
     );
-
-    console.log( 'loaded ^^', lampData );
-
-    const lamp = setupLamp( lampData );
-    lamp.scale.setScalar( 4 );
-    lamp.position.set( 0, 0.7, 0 );
-
-    return lamp;
 }
 
 export { loadLamp };

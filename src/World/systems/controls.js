@@ -7,6 +7,7 @@ function createControls( camera, canvas ){
     controls.enableDamping = true; // add inertia to movement
     controls.dampingFactor = 1.5;
     controls.enablePan = false;
+    controls.target.set( 0, 2, 0 );
 
     controls.tick = () => {
         controls.update();

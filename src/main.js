@@ -8,9 +8,6 @@ async function main() {
     // create instance of World app
     const world = new World( container );
 
-    // complete async tasks
-    await world.init();
-
     // render the scene
     world.start();
 }

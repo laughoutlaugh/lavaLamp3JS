@@ -10,6 +10,7 @@ import { createScene } from "./components/scene";
 import { createGridHelper } from "./components/helpers";
 import { loadLamp } from './components/Lamp/lamp';
 import { cAmbLight } from './components/lights';
+import { makeTable } from './components/Room/geometries';
 
 // module scoped parameters
 let camera, renderer, scene, controls, loop;
@@ -27,6 +28,18 @@ class World {
         // --- Entities ---
         const { grid, axes } = createGridHelper();
         const ambLight = cAmbLight( '#ebaf8d' );
+        const table = makeTable();
+
+        // --- Lamp Setup ---
+        this.lamp = null;
+            loadLamp(( lamp ) => {
+                this.lamp = lamp;
+
+                console.log( 'Lamp received by World:', this.lamp );
+
+                scene.add( this.lamp );
+            });
+
 
         // --- OrbitControls ---
         controls = createControls( camera, renderer.domElement );
@@ -34,17 +47,12 @@ class World {
         // --- Set Scene ---
         scene.add(  grid,
                     axes,
-                    ambLight
+                    ambLight,
+                    table,
             );
 
         // --- Window Resizing ---
         const resizer = new Resizer( container, camera, renderer );
-    }
-
-    async init() {
-        const lamp = await loadLamp();
-
-        scene.add( lamp );
     }
 
     // --- Scene Rendering ---
