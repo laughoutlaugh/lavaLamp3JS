@@ -9,10 +9,14 @@ import { createCamera } from "./components/camera";
 import { createScene } from "./components/scene";
 import { createGridHelper } from "./components/helpers";
 import { loadLamp } from './components/Lamp/lamp';
-import { cAmbLight } from './components/lights';
-import { makeTable } from './components/Room/geometries';
+import { cAmbLight, cSpotLight, cPointLight } from './components/lights';
+import { loadScene } from './components/Room/geometries';
 
-// module scoped parameters
+//import { makeTable, makeRoom } from './components/Room/geometries';
+
+import { SpotLight, PointLight } from 'three';
+
+// module scoped parametersW
 let camera, renderer, scene, controls, loop;
 
 class World {
@@ -27,32 +31,54 @@ class World {
 
         // --- Entities ---
         const { grid, axes } = createGridHelper();
+
+        // --- Lights ---
         const ambLight = cAmbLight( '#ebaf8d' );
-        const table = makeTable();
+        const spotLight = cSpotLight( '#ebaf8d', 100 );
+        spotLight.position.set( 1, 1.75, -1 );
+        const pointLight = new PointLight( '#ebaf8d', 100);
+        pointLight.position.set( -3, 6, -4 );
 
         // --- Lamp Setup ---
-        this.lamp = null;
-            loadLamp(( lamp ) => {
-                this.lamp = lamp;
+        let lavaLamp = null;
+        loadLamp(( lamp ) => {
+            lavaLamp = lamp;
 
-                console.log( 'Lamp received by World:', this.lamp );
+            console.log( 'Lamp received by World:', lavaLamp, lavaLamp.position );
 
-                scene.add( this.lamp );
-            });
+            scene.add( lavaLamp );
+        });
+
+        let sceneMesh = null;
+        loadScene(( sMesh ) => {
+            sceneMesh = sMesh;
+
+            console.log( 'Scene received by World:', sceneMesh );
+
+            scene.add( sceneMesh );
+        });
 
 
         // --- OrbitControls ---
         controls = createControls( camera, renderer.domElement );
 
+
+        // --- Testing ---
+        const sLight = new SpotLight( '#ebaf8d', 20 );
+        sLight.position.set( 2, 2.5, -2 );
+        sLight.castShadow = true;
+        sLight.shadow.mapSize.width = 1024;
+        sLight.shadow.mapSize.height = 1024;
+
         // --- Set Scene ---
-        scene.add(  grid,
-                    axes,
+        scene.add(  axes,
                     ambLight,
-                    table,
+                    pointLight,
             );
 
         // --- Window Resizing ---
         const resizer = new Resizer( container, camera, renderer );
+
     }
 
     // --- Scene Rendering ---
@@ -68,9 +94,5 @@ class World {
         loop.stop();
     }
 }
-
-/**
- * Step 1: Add textured lamp to scene, animate when needed
- */
 
 export { World };

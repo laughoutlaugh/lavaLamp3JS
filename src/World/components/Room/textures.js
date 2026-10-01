@@ -1,23 +1,45 @@
-import { TextureLoader, MeshStandardMaterial } from 'three';
+import { TextureLoader, MeshPhysicalMaterial, BackSide } from 'three';
 
+/**
 function woodMaterial() {
     const textureLoader = new TextureLoader();
 
-    const woodTexture = textureLoader.load(
-        '/src/World/components/Room/assets/the-cleveland-museum-of-art-ZX5NLSmivDI-unsplash.jpg',
+    const woodColorTexture = textureLoader.load(
+        '/assets/table/table.jpg',
         undefined,undefined,
         ( error ) => {
             console.log( 'Failed to load wood texture :(', error );
         }
     );
 
-    const woodMaterial = new MeshStandardMaterial({
-        map: woodTexture,
+    const woodNormTexture = textureLoader.load(
+        '/assets/table/NORMwood.jpg',
+        undefined,undefined,
+        ( error ) => {
+            console.log( 'Failed to load wood texture :(', error );
+        }
+    );
+
+    const woodMaterial = new MeshPhysicalMaterial({
+        map: woodColorTexture,
+        normalMap: woodNormTexture,
+        // normalScale: 0.15,
+        side: BackSide,
     })
 
     return woodMaterial;
 }
 
-function wallMaterial() {}
+function wallMaterial() {
+    const textureLoader = new TextureLoader();
+
+    const wallMaterial = new MeshPhysicalMaterial({
+
+    });
+
+    return wallMaterial;
+}
 
 export { woodMaterial, wallMaterial };
+
+ **/
