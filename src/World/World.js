@@ -34,9 +34,9 @@ class World {
 
         // --- Lights ---
         const ambLight = cAmbLight( '#ebaf8d' );
-        const spotLight = cSpotLight( '#ebaf8d', 100 );
+        const spotLight = cSpotLight( '#ebaf8d', 50 );
         spotLight.position.set( 1, 1.75, -1 );
-        const pointLight = new PointLight( '#ebaf8d', 100);
+        const pointLight = new PointLight( '#ebaf8d', 50 );
         pointLight.position.set( -3, 6, -4 );
 
         // --- Lamp Setup ---
@@ -62,17 +62,8 @@ class World {
         // --- OrbitControls ---
         controls = createControls( camera, renderer.domElement );
 
-
-        // --- Testing ---
-        const sLight = new SpotLight( '#ebaf8d', 20 );
-        sLight.position.set( 2, 2.5, -2 );
-        sLight.castShadow = true;
-        sLight.shadow.mapSize.width = 1024;
-        sLight.shadow.mapSize.height = 1024;
-
         // --- Set Scene ---
-        scene.add(  axes,
-                    ambLight,
+        scene.add(  //ambLight,
                     pointLight,
             );
 

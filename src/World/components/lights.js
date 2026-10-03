@@ -48,7 +48,6 @@ function cSpotLight( color='0xffffff', intensity=1, distance=0, decay=2 ) {
     const light = new SpotLight( color, intensity, distance, Math.PI/3, 0, decay );
 
     light.castShadow = true;
-    light.shadow.normalBias = -0.01
 
     return light;
 }

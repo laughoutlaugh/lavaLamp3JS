@@ -7,7 +7,7 @@ function loadLamp( onLoaded ) {
     loader.load(
         '/models/lavaLamp.glb',
         ( lampData ) => {
-            console.log( 'loaded^^', lampData );
+            console.log( 'loaded^^', lampData, );
 
             const lamp =  setupLamp( lampData );
 

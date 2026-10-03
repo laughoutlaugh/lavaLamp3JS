@@ -1,4 +1,4 @@
-import { MeshPhysicalMaterial, MeshStandardMaterial, TextureLoader } from 'three';
+import { MeshPhysicalMaterial } from 'three';
 
 function glassMaterial() {
 

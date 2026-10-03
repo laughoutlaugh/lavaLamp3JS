@@ -9,8 +9,6 @@ function setupLamp( data ) {
 
     glassPart.material = glassMaterial();
 
-    // lamp.scale.setScalar();
-
     metalPart.castShadow = true;
     glassPart.castShadow = true;
 

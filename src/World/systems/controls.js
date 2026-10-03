@@ -6,10 +6,10 @@ function createControls( camera, canvas, target ){
 
     controls.enableDamping = true;              // add inertia to movement
     controls.dampingFactor = 1.5;               // amount of inertia
-    controls.minDistance = 1;                   // closest zoom in
-    controls.maxDistance = 10;                  // furthest zoom out
+    controls.minDistance = 0.5;                   // closest zoom in
+    controls.maxDistance = 2.09;                  // furthest zoom out
     controls.maxPolarAngle = Math.PI/2;         // lowest rotation down
-    controls.target.set( -0.9, 2.3, 0.4 );    // target of controls
+    controls.target.set( -1.32, 2.3, 0.06 );    // target of controls
     controls.update();
 
     controls.tick = () => {
