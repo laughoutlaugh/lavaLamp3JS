@@ -26,6 +26,7 @@ class Loop {
 
     tick() {
         // only call the getDelta once per frame
+        timer.update();
         const delta = timer.getDelta();
 
         for ( const object of this.updatables ) {

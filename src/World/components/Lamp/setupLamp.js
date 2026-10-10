@@ -1,11 +1,10 @@
-import { AnimationMixer } from 'three';
-import { glassMaterial } from './textures';
+import { glassMaterial } from "./material.js";
 
 function setupLamp( data ) {
-    const lamp = data.scene.children[3];
+    const lamp = data.scene.getObjectByName( 'lavaLamp' );
 
-    const metalPart = data.scene.children[3].children[0];
-    const glassPart = data.scene.children[3].children[1];
+    const metalPart = lamp.children[0];
+    const glassPart = lamp.children[1];
 
     glassPart.material = glassMaterial();
 
@@ -15,4 +14,10 @@ function setupLamp( data ) {
     return lamp;
 }
 
-export { setupLamp };
+function setupPanel( data ) {
+    const lampPanel = data.scene.getObjectByName( 'lavaLampPanel' );
+
+    return lampPanel;
+}
+
+export { setupLamp, setupPanel };

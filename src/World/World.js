@@ -3,21 +3,20 @@ import { createRenderer } from "./systems/renderer";
 import { Resizer } from "./systems/Resizer";
 import { createControls } from "./systems/controls";
 import { Loop } from './systems/Loop.js';
+import { DOF } from "./systems/DOF";
 
 // Components
 import { createCamera } from "./components/camera";
 import { createScene } from "./components/scene";
 import { createGridHelper } from "./components/helpers";
-import { loadLamp } from './components/Lamp/lamp';
 import { cAmbLight, cSpotLight, cPointLight } from './components/lights';
 import { loadScene } from './components/Room/geometries';
-
-//import { makeTable, makeRoom } from './components/Room/geometries';
+import { Lamp } from "./components/Lamp/Lamp";
 
 import { SpotLight, PointLight } from 'three';
 
 // module scoped parametersW
-let camera, renderer, scene, controls, loop;
+let camera, renderer, scene, controls, loop, bPass;
 
 class World {
     // create instance of World app
@@ -29,25 +28,20 @@ class World {
         container.append( renderer.domElement ); // add canvas to container
         loop = new Loop( camera, scene, renderer );
 
+        //bPass = new DOF( scene, camera, renderer );
+        //loop.updatables.push( bPass );
+
+
         // --- Entities ---
         const { grid, axes } = createGridHelper();
 
         // --- Lights ---
         const ambLight = cAmbLight( '#ebaf8d' );
-        const spotLight = cSpotLight( '#ebaf8d', 50 );
-        spotLight.position.set( 1, 1.75, -1 );
         const pointLight = new PointLight( '#ebaf8d', 50 );
         pointLight.position.set( -3, 6, -4 );
+        pointLight.castShadow = true;
 
         // --- Lamp Setup ---
-        let lavaLamp = null;
-        loadLamp(( lamp ) => {
-            lavaLamp = lamp;
-
-            console.log( 'Lamp received by World:', lavaLamp, lavaLamp.position );
-
-            scene.add( lavaLamp );
-        });
 
         let sceneMesh = null;
         loadScene(( sMesh ) => {
@@ -58,14 +52,18 @@ class World {
             scene.add( sceneMesh );
         });
 
+        const lavaLamp = new Lamp( true, loop );
 
         // --- OrbitControls ---
         controls = createControls( camera, renderer.domElement );
 
         // --- Set Scene ---
-        scene.add(  //ambLight,
+        scene.add(  ambLight,
                     pointLight,
+                    lavaLamp,
             );
+
+        console.log( loop.updatables );
 
         // --- Window Resizing ---
         const resizer = new Resizer( container, camera, renderer );
