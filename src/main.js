@@ -1,6 +1,5 @@
 import { World } from './World/World';
 
-// async function ensures page loads with textures
 async function main() {
     // get reference to container element
     const container = document.querySelector( '#scene-container' );
@@ -13,7 +12,26 @@ async function main() {
 }
 
 // call main with error handling
-
 main().catch(( err ) => {
     console.error( err );
 });
+
+/**
+ * 10-13-2026
+ * To-do:
+ *  - BokehPass DOF effect
+ *  - Fix light functions
+ *  - Fix scene lighting
+ *  - Animate new lava mp4
+ *  - Update lava material
+ *  - Implement error catching
+ *  - General code cleanup
+ *  - Organize comments
+ *
+ *  Later:
+ *  - 3 button options
+ *  - Floating/closable menu
+ *  - Bubble solution
+ *  - Metaballs solution
+ *  - Phone implementation?
+ */

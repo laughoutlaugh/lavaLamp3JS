@@ -1,4 +1,4 @@
-import { MeshPhysicalMaterial, VideoTexture } from 'three';
+import { MeshPhysicalMaterial, MeshPhongMaterial, VideoTexture, SRGBColorSpace } from 'three';
 
 function glassMaterial() {
     return new MeshPhysicalMaterial({
@@ -10,13 +10,16 @@ function glassMaterial() {
 }
 
 function lavaMaterial( video ) {
+    // import video texture
     const texture = new VideoTexture( video );
+    texture.colorSpace = SRGBColorSpace;
 
-    const material = new MeshPhysicalMaterial({
+    return new MeshPhongMaterial({
         map: texture,
-    });
+        color: "#fc5a03",
+        toneMapped: false,
 
-    return material;
+    });
 }
 
 export { glassMaterial, lavaMaterial };
