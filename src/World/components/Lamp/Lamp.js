@@ -6,7 +6,7 @@ class Lamp extends Group {
 
     #radiansPerSecond = MathUtils.degToRad( 60 );
 
-    constructor( animate=false, loop=null ) {
+    constructor( camera, animate=false, loop=null, lampVideo=null ) {
         super();
         this.loader = new GLTFLoader();
 
@@ -15,6 +15,9 @@ class Lamp extends Group {
 
         this.load();
         if ( animate ) {
+            this.video = lampVideo
+            this.video.play();
+            this.camera = camera;
             loop.updatables.push( this );
         }
     }
@@ -25,7 +28,7 @@ class Lamp extends Group {
         );
 
         this.lamp = setupLamp( lampData );
-        this.panel = setupPanel( lampData );
+        this.panel = setupPanel( lampData, this.video );
 
         if ( this.lamp ) this.add( this.lamp );
         if ( this.panel ) this.add( this.panel );
@@ -39,7 +42,8 @@ class Lamp extends Group {
     tick( delta ) {
         if ( !this.loaded ) return;
 
-        this.panel.rotation.y += delta * ( Math.PI / 2 ); // implement camera tracking here
+        this.panel.rotation.y = ( - Math.atan2( this.panel.position.z - this.camera.position.z,
+                                    this.panel.position.x - this.camera.position.x ) );
     }
 }
 

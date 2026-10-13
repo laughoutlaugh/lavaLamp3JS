@@ -1,4 +1,5 @@
-import { glassMaterial } from "./material.js";
+import { glassMaterial, lavaMaterial } from "./material.js";
+import { Vector3 } from "three";
 
 function setupLamp( data ) {
     const lamp = data.scene.getObjectByName( 'lavaLamp' );
@@ -14,10 +15,14 @@ function setupLamp( data ) {
     return lamp;
 }
 
-function setupPanel( data ) {
-    const lampPanel = data.scene.getObjectByName( 'lavaLampPanel' );
+function setupPanel( data, video ) {
+    const panel = data.scene.getObjectByName( 'lavaLampPanel' );
+    panel.material = lavaMaterial( video );
+    //let measure = new Vector3();
+    //let box = panel.getSize( measure );
+    //console.log( measure );
 
-    return lampPanel;
+    return panel;
 }
 
 export { setupLamp, setupPanel };

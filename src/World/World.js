@@ -31,9 +31,10 @@ class World {
         //bPass = new DOF( scene, camera, renderer );
         //loop.updatables.push( bPass );
 
-
         // --- Entities ---
         const { grid, axes } = createGridHelper();
+        const lampVideo = document.getElementById( 'video' );
+        //lampVideo.play();
 
         // --- Lights ---
         const ambLight = cAmbLight( '#ebaf8d' );
@@ -52,7 +53,7 @@ class World {
             scene.add( sceneMesh );
         });
 
-        const lavaLamp = new Lamp( true, loop );
+        const lavaLamp = new Lamp( camera, true, loop, lampVideo );
 
         // --- OrbitControls ---
         controls = createControls( camera, renderer.domElement );

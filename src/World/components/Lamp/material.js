@@ -1,4 +1,4 @@
-import { MeshPhysicalMaterial } from 'three';
+import { MeshPhysicalMaterial, VideoTexture } from 'three';
 
 function glassMaterial() {
     return new MeshPhysicalMaterial({
@@ -9,4 +9,14 @@ function glassMaterial() {
     );
 }
 
-export { glassMaterial };
+function lavaMaterial( video ) {
+    const texture = new VideoTexture( video );
+
+    const material = new MeshPhysicalMaterial({
+        map: texture,
+    });
+
+    return material;
+}
+
+export { glassMaterial, lavaMaterial };
