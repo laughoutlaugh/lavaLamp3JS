@@ -1,10 +1,7 @@
-import { WebGLRenderer } from 'three';
+import { WebGLRenderer, NeutralToneMapping } from 'three';
 
 function createRenderer() {
     const renderer = new WebGLRenderer( {antialias: true} );
-
-    // turn on physically correct lighting model
-    //renderer.physicallyCorrectLights = true;
 
     // turn on soft shadows
     renderer.shadowMap.enabled = true;
@@ -14,6 +11,8 @@ function createRenderer() {
     renderer.shadowMapDarkness = 1;
     renderer.shadowMapWidth = 1024;
     renderer.shadowMapHeight = 1024;
+
+    //renderer.toneMapping = NeutralToneMapping;
 
     return renderer;
 }

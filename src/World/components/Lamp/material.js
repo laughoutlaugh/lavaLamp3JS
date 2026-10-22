@@ -1,5 +1,10 @@
-import { MeshPhysicalMaterial, MeshPhongMaterial, VideoTexture, SRGBColorSpace } from 'three';
+import { MeshPhysicalMaterial, MeshPhongMaterial, MeshStandardMaterial, MeshBasicMaterial, VideoTexture } from 'three';
 
+/**
+ * Initializes and returns basic glass texture.
+ *
+ * @returns {MeshPhysicalMaterial}
+ */
 function glassMaterial() {
     return new MeshPhysicalMaterial({
             roughness: 0,
@@ -9,15 +14,21 @@ function glassMaterial() {
     );
 }
 
+/**
+ * Initializes and returns animated, emissive video texture with provided video element.
+ *
+ * @param {HTMLElement} video   .mp4 video
+ * @returns {MeshPhongMaterial} animated video material
+ */
 function lavaMaterial( video ) {
-    // import video texture
     const texture = new VideoTexture( video );
-    texture.colorSpace = SRGBColorSpace;
 
-    return new MeshPhongMaterial({
+    return new MeshBasicMaterial({
         map: texture,
-        color: "#fc5a03",
-        toneMapped: false,
+        //color: "#fc5a03",
+        //emissive: '#FFFFFF',
+        //emissiveIntensity: 0.15,
+        //toneMapped: false,
 
     });
 }

@@ -20,13 +20,15 @@ main().catch(( err ) => {
  * 10-13-2026
  * To-do:
  *  - BokehPass DOF effect
- *  - Fix light functions
  *  - Fix scene lighting
  *  - Animate new lava mp4
  *  - Update lava material
+ *  - Add lava lamp lights
  *  - Implement error catching
  *  - General code cleanup
  *  - Organize comments
+ *  - Better textures?
+ *  - FPS tracking
  *
  *  Later:
  *  - 3 button options
